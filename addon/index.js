@@ -17,5 +17,9 @@ let PolarBear = Ember.Object.extend({
   }
 });
 
+PolarBear.reopenClass({
+  type: 'PolarBear'
+});
+
 export default PolarBear;
 
