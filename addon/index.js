@@ -1,19 +1,17 @@
 let PolarBear = Ember.Object.extend({
-  interval: 1000,
-
-  schedule(f) {
+  schedule(target, f, interval) {
     return Ember.run.later(this, function() {
-      f.apply(this);
-      this.start(f);
-    }, this.get('interval'));
+      f.apply(target);
+      this.start(target, f, interval);
+    }, interval);
   },
 
   kill() {
     return Ember.run.cancel(this.get('timer'));
   },
 
-  start(f) {
-    this.set('timer', this.schedule(f));
+  start(target, f, interval = 500) {
+    this.set('timer', this.schedule(target, f, interval));
   }
 });
 
@@ -21,5 +19,5 @@ PolarBear.reopenClass({
   type: 'PolarBear'
 });
 
-export default PolarBear;
+export default PolarBear.create();
 
