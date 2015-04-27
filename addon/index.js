@@ -1,6 +1,10 @@
 let PolarBear = Ember.Object.extend({
   interval: 1000,
 
+  isAlive: Ember.computed('timer', function() {
+    return Ember.isPresent(this.get('timer'));
+  }),
+
   schedule(context, f) {
     return Ember.run.later(this, function() {
       f.apply(context);
